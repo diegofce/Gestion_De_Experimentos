@@ -2,13 +2,16 @@ import datetime
 
 #Atributos: Nombre, Fecha (DD/MM/AAAA), Tipo y resultados numericos
 
-listaExperimentos = [
-    ['Experimento 1','16/11/2024', 'Quimica', [1,2,3,4,5,6,7,8,9,10]],
-]
+listaExperimentos = []
 
 def agregar_Experimentos(): #funcion para agregar experimentos
-    pass
-
+    """
+    Permite al usuario agregar un nuevo experimento ingresando su nombre, 
+    fecha de realización, tipo y una lista de resultados numéricos.
+    """
+    print("\n--- Agregar Experimento ---")
+    nombre = input("Nombre del experimento: ")
+    
 def mostrar_Experimentos(): #funcion para mostrar experimentos
     pass
 
