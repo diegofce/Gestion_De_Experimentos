@@ -2,15 +2,35 @@ import datetime
 
 #Atributos: Nombre, Fecha (DD/MM/AAAA), Tipo y resultados numericos
 
-listaExperimentos = []
+Experiments = []
 
-def agregar_Experimentos(): #funcion para agregar experimentos
+def add_experiments(): #funcion para agregar experimentos
     """
     Permite al usuario agregar un nuevo experimento ingresando su nombre, 
     fecha de realización, tipo y una lista de resultados numéricos.
     """
     print("\n--- Agregar Experimento ---")
-    nombre = input("Nombre del experimento: ")
+    nameExperiment = input("Nombre del experimento: ")
+
+    # Validar la fecha del experimento con el formato: DD/MM/AAAA
+
+    while True: 
+        fecha = input("Fecha de realización (DD/MM/AAAA): ")
+        try:
+            fecha = datetime.datetime.strptime(fecha, "%d/%m/%Y")
+            break  
+        except ValueError:
+            print("Fecha no válida. Por favor, use el formato DD/MM/AAAA.")
+
+
+    # Validación del tipo de experimento
+    categorias = ["Química", "Biología", "Física"]
+    print("Tipos de experimento disponibles:", ", ".join(categorias))
+    while True:
+        tipo = input("Tipo de experimento: ")
+        if tipo in categorias:
+            break  # El tipo es válido
+        print("Tipo no válido. Debe ser uno de los siguientes:", ", ".join(categorias))
     
 def mostrar_Experimentos(): #funcion para mostrar experimentos
     pass
