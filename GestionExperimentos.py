@@ -133,35 +133,34 @@ def generar_Informe(): #funcion para generar informe tipo resumen + Estadisticas
     #Muestra el menú principal con opciones para gestionar experimentos,
     #analizarlos, generar informes o salir del programa.
     #"""
-while True:
-    print("|=======>  Menu:  <=======|")
-    print("| 1. Agregar Experimento  |")
-    print("| 2. Mostrar Experimentos |")
-    print("| 3. Calcular Estadisticas|")
-    print("| 4. Comparar Experimentos|")
-    print("| 5. Eliminar Experimento |")
-    print("| 6. Generar Informe      |")
-    print("| 7. Salir                |")
-    print("|=========================|")
-        
-    opcion = input("Seleccione una opción: ")
-    if opcion == "1":
-        add_experiments()
-    elif opcion == "2":
-        mostrar_Experimentos()
-    elif opcion == "3":
-        calcular_Experimentos()
-    elif opcion == "6":
-        generar_Informe()
-    elif opcion == "7":
-        print("Saliendo del programa. ¡Hasta luego!")
-        break
-    else:
-        print("Opción no válida. Intente de nuevo.")
+def menu():
+    while True:
+        print("|=======>  Menu:  <=======|")
+        print("| 1. Agregar Experimento  |")
+        print("| 2. Mostrar Experimentos |")
+        print("| 3. Calcular Estadisticas|")
+        print("| 4. Comparar Experimentos|")
+        print("| 5. Eliminar Experimento |")
+        print("| 6. Generar Informe      |")
+        print("| 7. Salir                |")
+        print("|=========================|")
+            
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            add_experiments()
+        elif opcion == "2":
+            mostrar_Experimentos()
+        elif opcion == "3":
+            calcular_Experimentos()
+        elif opcion == "6":
+            generar_Informe()
+        elif opcion == "7":
+            print("Saliendo del programa. ¡Hasta luego!")
+            break
+        else:
+            print("Opción no válida. Intente de nuevo.")
 
 # Ejecución del programa
 if __name__ == "__main__":
-    menu()  # Llama al menú principal para iniciar la interacción
-
-
-
+      # Llama al menú principal para iniciar la interacción
+    menu()
