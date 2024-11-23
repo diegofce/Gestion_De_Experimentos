@@ -129,24 +129,6 @@ def generar_Informe(): #funcion para generar informe tipo resumen + Estadisticas
             archivo.write("-" * 50 + "\n")
     print(f"Informe guardado como '{nombre_archivo}'.")
 
-
-def menu(): #funcion para mostrar menu
-    print("|=======>  Menu:  <=======|")
-    print("| 1. Agregar Experimento  |")
-    print("| 2. Mostrar Experimentos |")
-    print("| 3. Calcular Estadisticas|")
-    print("| 4. Comparar Experimentos|")
-    print("| 5. Eliminar Experimento |")
-    print("| 6. Generar Informe      |")
-    print("| 7. Salir                |")
-    print("|=========================|")
-    
-def main(): #funcion principal, controla el flujo del sistema
-    menu()
-    pass
-
-main()
-
     #"""
     #Muestra el menú principal con opciones para gestionar experimentos,
     #analizarlos, generar informes o salir del programa.
