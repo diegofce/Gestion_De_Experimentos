@@ -2,9 +2,9 @@ import datetime
 
 #Atributos: Nombre, Fecha (DD/MM/AAAA), Tipo y resultados numericos
 
-listaExperimentos = []
+Experiments = []
 
-def agregar_Experimentos(): #funcion para agregar experimentos
+def add_experiments(): #funcion para agregar experimentos
     """
     Permite al usuario agregar un nuevo experimento ingresando su nombre, 
     fecha de realización, tipo y una lista de resultados numéricos.
