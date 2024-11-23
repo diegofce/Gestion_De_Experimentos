@@ -1,0 +1,14 @@
+Informe de Proyecto de Investigación Científica
+==================================================
+Nombre: 345
+Fecha: 23111234
+Tipo: Fisica
+Resultados: [34, 34, 65, 7, 3, 6]
+  Promedio: 24.83, Máximo: 65.00, Mínimo: 3.00
+--------------------------------------------------
+Nombre: sdfg
+Fecha: 12102026
+Tipo: Quimica
+Resultados: [2, 3, 45, 2, 34, 234]
+  Promedio: 53.33, Máximo: 234.00, Mínimo: 2.00
+--------------------------------------------------
