@@ -29,22 +29,38 @@ def add_experiments(experiments): #funcion para agregar experimentos
         except ValueError:
             print("Fecha no válida. Por favor, usar el formato DD/MM/AAAA")
 
-    typeExperiments = ['a', 'b', 'c'] # tipos de experimentos disponibles
     while True:                     # Validación del tipo de experimento
-        typeExperiment = input('Ingrese la categoría del experimento (Biología, Física o Química): ')
-        if typeExperiment in typeExperiments: #Si el tipo de experimento esta en la lista categorias es valido
-            break  
-        else:
-            print("Tipo no válido. Debe ser uno de los siguientes:", ", ".join(typeExperiments))
+        try:
+            print('Experimentos disponibles:\n1. Biología \n2. Física \n3. Química)')
+            typeE = int(input('Seleccione la categoría que desee: '))
+            if(typeE == 1):
+                typeExperiment = 'Biología'
+                break
+            elif(typeE == 2):
+                typeExperiment = 'Física'
+                break
+            elif(typeE == 3):
+                typeExperiment = 'Química'
+                break
+        except(ValueError):
+            print('Tipo no válido.')
 
     resultsExperiment = []    #RESULTADOS ----------------------|
+    cont = 0
     while True:
         try:
             # Se ingresa cada resultado como un número entero
-            result = int(input("Ingrese un resultado : (En numeros: !):"))
-            resultsExperiment.append(result)
-            print("\nResultado agregado con éxito.")
-            print("Si termino presione solo -ENTER-")
+            result = float(input("Ingrese los resultados numéricos de su experimento: "))
+            if(result>=0):
+                resultsExperiment.append(result)
+                cont=cont+1
+                print(f'{cont} resultado agregado con éxito')
+            else:
+                print('** No se puede ingresar números negativos **')
+            if(cont<4):
+                print('Por favor ingrese mínimo 3 resultados')
+            else:
+                print("Si termino presione solo -ENTER-")
         except ValueError:
             # Permite terminar la entrada de resultados
             if input("¿Terminar entrada de resultados? (Presione: (s) para salir): ").lower() == "s":
@@ -95,8 +111,22 @@ def calculate_experiments(experiments):
 def compare_experiments(experiments): #funcion para comparar experimentos = 2 o mas 
     pass
 
-def eliminar_Experimentos(): #funcion para eliminar un experimento
-    pass
+def erase_experiments(experiments): #funcion para eliminar un experimento
+    visualize_experiments(experiments)
+    if not experiments:
+        return
+    try:
+        index = int(input("\nSeleccione el número del experimento a eliminar: ")) - 1
+        exp = experiments[index]
+        print(f'Esta seguro que desea eliminar el experimento {exp.nameExperiment}?')
+        conf = input('Si (s) _ No (n)').lower()
+        if(conf=='s' or conf=='si'):
+            experiments.remove(exp)
+            print('**Experimento eliminado con éxito**')
+        else:
+            return
+    except (IndexError,ValueError):
+        print('Experimento no existente')
 
 def generate_Report(experiments): #funcion para generar informe tipo resumen + Estadisticas
     """
@@ -132,31 +162,37 @@ def generate_Report(experiments): #funcion para generar informe tipo resumen + E
 def menu():
     experiments = []
     while True:
-        print("|=======>  Menu:  <=======|")
-        print("| 1. Agregar Experimento  |")
-        print("| 2. Mostrar Experimentos |")
-        print("| 3. Calcular Estadisticas|")
-        print("| 4. Comparar Experimentos|")
-        print("| 5. Eliminar Experimento |")
-        print("| 6. Generar Informe      |")
-        print("| 7. Salir                |")
-        print("|=========================|")
-            
-        opcion = input("Seleccione una opción: ")
-        if opcion == "1":
-            add_experiments(experiments)
-        elif opcion == "2":
-            visualize_experiments(experiments)
-        elif opcion == "3":
-            calculate_experiments(experiments)
-        elif opcion == "4":
-            compare_experiments(experiments)
-        elif opcion == "6":
-            generate_Report(experiments)
-        elif opcion == "7":
-            print("Saliendo del programa. ¡Hasta luego!")
-            break
-        else:
+        try:
+            print("|=======>  Menu:  <=======|")
+            print("| 1. Agregar Experimento  |")
+            print("| 2. Mostrar Experimentos |")
+            print("| 3. Calcular Estadisticas|")
+            print("| 4. Comparar Experimentos|")
+            print("| 5. Eliminar Experimento |")
+            print("| 6. Generar Informe      |")
+            print("| 7. Salir                |")
+            print("|=========================|")
+                
+            option = int(input("Seleccione una opción: "))
+            if(option<1 or option>7):
+                print('Opción no válida. Intente de nuevo')
+            else:
+                if option == 1:
+                    add_experiments(experiments)
+                elif option == 2:
+                    visualize_experiments(experiments)
+                elif option == 3:
+                    calculate_experiments(experiments)
+                elif option == 4:
+                    compare_experiments(experiments)
+                elif option == 5:
+                    erase_experiments(experiments)
+                elif option == 6:
+                    generate_Report(experiments)
+                elif option == 7:
+                    print("Saliendo del programa. ¡Hasta luego!")
+                    break
+        except(ValueError):
             print("Opción no válida. Intente de nuevo.")
 
 # Ejecución del programa
