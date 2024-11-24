@@ -1,0 +1,8 @@
+Informe de Proyecto de Investigación Científica
+==================================================
+Nombre: 234sdfg
+Fecha: 21112345
+Tipo: a
+Resultados: [234.0, 23.0, 32.0, 4.0, 34.0, 5.0]
+  Promedio: 55.33, Máximo: 234.00, Mínimo: 4.00
+--------------------------------------------------
