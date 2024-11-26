@@ -1,5 +1,4 @@
 import datetime 
-import statistics
 from tabulate import tabulate 
 
 #Atributos: Nombre experimentos, Fecha realización (DD/MM/AAAA), Tipo experimento y resultados numericos
@@ -21,7 +20,8 @@ def add_experiments(experiments): #funcion para agregar experimentos
     print("\n--- Agregar Experimento ---")
     nameExperiment = input("Ingrese el nombre del experimento: ")
     
-    while True:                             # Validar la fecha del experimento con el formato: DD/MM/AAAA
+    while True:                             
+        # Validar la fecha del experimento con el formato: DD/MM/AAAA
         dateExperiment_str = input("Ingrese la fecha de realización (ejm 23/11/2024): ")
         try:
             dateExperiment = datetime.datetime.strptime(dateExperiment_str, "%d/%m/%Y")
@@ -31,7 +31,7 @@ def add_experiments(experiments): #funcion para agregar experimentos
 
     while True:                     # Validación del tipo de experimento
         try:
-            print('Experimentos disponibles:\n1. Biología \n2. Física \n3. Química)')
+            print('Experimentos disponibles:\n1. Biología \n2. Física \n3. Química')
             typeE = int(input('Seleccione la categoría que desee: '))
             if(typeE == 1):
                 typeExperiment = 'Biología'
@@ -43,29 +43,28 @@ def add_experiments(experiments): #funcion para agregar experimentos
                 typeExperiment = 'Química'
                 break
         except(ValueError):
-            print('Tipo no válido.')
+            print('Tipo no válido. Intente de Nuevo.')
 
-    resultsExperiment = []    #RESULTADOS ----------------------|
-    cont = 0
-    while True:
+
+    # Capturar los resultados
+    resultsExperiment = []
+    print("Ingrese los resultados numéricos (ej: 3.5(enter) 2.3(enter)...)(máximo 3). Presione ENTER sin escribir nada para terminar.")
+    while len(resultsExperiment) < 3:
         try:
-            # Se ingresa cada resultado como un número entero
-            result = float(input("Ingrese los resultados numéricos de su experimento: "))
-            if(result>=0):
-                resultsExperiment.append(result)
-                cont=cont+1
-                print(f'{cont} resultado agregado con éxito')
-            else:
-                print('** No se puede ingresar números negativos **')
-            if(cont<4):
-                print('Por favor ingrese mínimo 3 resultados')
-            else:
-                print("Si termino presione solo -ENTER-")
-        except ValueError:
-            # Permite terminar la entrada de resultados
-            if input("¿Terminar entrada de resultados? (Presione: (s) para salir): ").lower() == "s":
+            result = input(f"Ingrese el resultado #{len(resultsExperiment) + 1}: ")
+            if not result:  # Salir si se presiona ENTER sin escribir nada
                 break
+            result = float(result)
+            if result >= 0:
+                resultsExperiment.append(result)
+            else:
+                print("Los resultados deben ser números positivos.")
+        except ValueError:
+            print("Entrada no válida. Por favor, ingrese un número.")
 
+    if not resultsExperiment:  # Validar si la lista de resultados está vacía
+        print("No se ingresaron resultados. El experimento no se guardará.")
+        return
     # Guardar los datos del experimento 
     experiment = Experiments(nameExperiment, dateExperiment, typeExperiment, resultsExperiment)
     experiments.append(experiment)
@@ -77,9 +76,12 @@ def visualize_experiments(experiments):
     if not experiments:
         print("No hay experimentos registrados")
         return
-    for i, exp in enumerate(experiments, start=1):    #Enumerar los experimentos indica que inicia en 1
-                                                # i es el contador de experimentos y exp es el valor de cada experimento
-        print(f"\n{i}. Nombre: {exp.nameExperiment}, Fecha: {exp.dateExperiment.strftime('%d%m%Y')}, Tipo: {exp.typeExperiment}, Resultados: {exp.resultsExperiment}")
+
+    table = [
+        [i+1, exp.nameExperiment, exp.dateExperiment.strftime('%d/%m/%Y'), exp.typeExperiment, exp.resultsExperiment]
+        for i, exp in enumerate(experiments)
+    ]
+    print(tabulate(table, headers=["#", "Nombre", "Fecha", "Tipo", "Resultados"]))
 
 #funcion para calcular Estadisticas promedio maximo y minimo de experimentos
 def calculate_experiments(experiments): 
@@ -108,8 +110,37 @@ def calculate_experiments(experiments):
     except (IndexError, ValueError):
         print("Selección inválida.")
 
-def compare_experiments(experiments): #funcion para comparar experimentos = 2 o mas 
-    pass
+def compare_experiments(experiments):
+    print("\n--- Comparar Experimentos ---")
+    visualize_experiments(experiments)
+    if len(experiments) < 2:
+        print("Debe haber al menos dos experimentos para comparar.")
+        return
+
+    try:
+        # Seleccionar los dos experimentos a comparar
+        index1 = int(input("Seleccione el número del primer experimento: ")) - 1
+        index2 = int(input("Seleccione el número del segundo experimento: ")) - 1
+        exp1 = experiments[index1]
+        exp2 = experiments[index2]
+
+        # Comparar promedios
+        avg1 = sum(exp1.resultsExperiment) / len(exp1.resultsExperiment)
+        avg2 = sum(exp2.resultsExperiment) / len(exp2.resultsExperiment)
+
+        print(f"\nComparación entre '{exp1.nameExperiment}' y '{exp2.nameExperiment}':")
+        print(f"- Promedio '{exp1.nameExperiment}': {avg1:.2f}")
+        print(f"- Promedio '{exp2.nameExperiment}': {avg2:.2f}")
+
+        if avg1 > avg2:
+            print(f"'{exp1.nameExperiment}' tiene un promedio mayor.")
+        elif avg1 < avg2:
+            print(f"'{exp2.nameExperiment}' tiene un promedio mayor.")
+        else:
+            print("Ambos experimentos tienen el mismo promedio.")
+    except (IndexError, ValueError):
+        print("Selección inválida.")
+
 
 def erase_experiments(experiments): #funcion para eliminar un experimento
     visualize_experiments(experiments)
