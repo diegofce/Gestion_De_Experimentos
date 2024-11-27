@@ -1,10 +1,12 @@
 import datetime 
 from tabulate import tabulate 
 
+
+#se crea la clase experimentos
 #Atributos: Nombre experimentos, Fecha realización (DD/MM/AAAA), Tipo experimento y resultados numericos
 
 class Experiments:
-    # función de inicialización
+    # función de inicialización, recibe los atributos
     def __init__(self, nameExperiment, dateExperiment, typeExperiment, resultsExperiment):
         self.nameExperiment = nameExperiment
         self.dateExperiment = dateExperiment
@@ -12,7 +14,7 @@ class Experiments:
         self.resultsExperiment = resultsExperiment 
       
 #funcion para agregar experimentos
-def add_experiments(experiments): #funcion para agregar experimentos
+def add_experiments(experiments):
     """
     Permite al usuario agregar un nuevo experimento ingresando su nombre, 
     fecha de realización, tipo y una lista de resultados numéricos.
@@ -30,7 +32,7 @@ def add_experiments(experiments): #funcion para agregar experimentos
         except ValueError:
             print("Fecha no válida. Por favor, usar el formato DD/MM/AAAA")
 
-    while True:                     # Validación del tipo de experimento
+    while True: # Validación del tipo de experimento
         try:
             print('Experimentos disponibles:\n1. Biología \n2. Física \n3. Química')
             typeE = int(input('Seleccione la categoría que desee: '))
@@ -52,17 +54,18 @@ def add_experiments(experiments): #funcion para agregar experimentos
     while True:
         try:
             # Se ingresa cada resultado como un número entero
-            result = float(input("Ingrese los resultados numéricos de su experimento: "))
+            result = float(input("Ingrese los resultados numéricos de su experimento: (ej: 4.5): "))
             if(result>=0):
                 resultsExperiment.append(result)
-                cont=cont+1
+                cont=cont+1 #cuenta los resultados
                 print(f'{cont} resultado agregado con éxito')
             else:
                 print('** No se puede ingresar números negativos **')
             if(cont<3):
-                print('Por favor ingrese mínimo 3 resultados')
-            else:
-                print("Si termino presione solo -ENTER-")
+                print('Por favor ingrese mínimo 3 resultados | Presione enter para continuar')
+            if(cont==3):
+                print('\nPresione enter para salir')
+                break
         except ValueError:
             # Permite terminar la entrada de resultados
             if input("¿Terminar entrada de resultados? (Presione: (s) para salir): ").lower() == "s":
@@ -75,7 +78,7 @@ def add_experiments(experiments): #funcion para agregar experimentos
     experiment = Experiments(nameExperiment, dateExperiment, typeExperiment, resultsExperiment)
     experiments.append(experiment)
 
-    print("Experimento agregado con éxito.")
+    print("--- Experimento agregado con éxito.---")
 
 #funcion para visualizar experimentos
 def visualize_experiments(experiments): 
