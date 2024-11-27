@@ -1,0 +1,14 @@
+Informe de Proyecto de Investigación Científica
+==================================================
+Nombre: Exp1
+Fecha: 11112345
+Tipo: Biología
+Resultados: [23.0, 3.0, 23.0]
+  Promedio: 16.33, Máximo: 23.00, Mínimo: 3.00
+--------------------------------------------------
+Nombre: Exp2
+Fecha: 05052345
+Tipo: Física
+Resultados: [234.0, 2.2, 23.3, 23.3, 23.0]
+  Promedio: 61.16, Máximo: 234.00, Mínimo: 2.20
+--------------------------------------------------
