@@ -9,14 +9,15 @@ class Experiments:
         self.nameExperiment = nameExperiment
         self.dateExperiment = dateExperiment
         self.typeExperiment = typeExperiment
-        self.resultsExperiment = resultsExperiment
-        
+        self.resultsExperiment = resultsExperiment 
+      
 #funcion para agregar experimentos
 def add_experiments(experiments): #funcion para agregar experimentos
     """
     Permite al usuario agregar un nuevo experimento ingresando su nombre, 
     fecha de realización, tipo y una lista de resultados numéricos.
     """
+    
     print("\n--- Agregar Experimento ---")
     nameExperiment = input("Ingrese el nombre del experimento: ")
     
@@ -47,12 +48,25 @@ def add_experiments(experiments): #funcion para agregar experimentos
 
     # Capturar los resultados
     resultsExperiment = []
+    cont = 0
     while True:
         try:
-            result = list(map(float, input(f'Ingrese los resultados separados por comas: ').split(',')))
-            resultsExperiment.append(result)           
+            # Se ingresa cada resultado como un número entero
+            result = float(input("Ingrese los resultados numéricos de su experimento: "))
+            if(result>=0):
+                resultsExperiment.append(result)
+                cont=cont+1
+                print(f'{cont} resultado agregado con éxito')
+            else:
+                print('** No se puede ingresar números negativos **')
+            if(cont<3):
+                print('Por favor ingrese mínimo 3 resultados')
+            else:
+                print("Si termino presione solo -ENTER-")
         except ValueError:
-            print("Entrada no válida. Por favor, ingrese un número.")
+            # Permite terminar la entrada de resultados
+            if input("¿Terminar entrada de resultados? (Presione: (s) para salir): ").lower() == "s":
+                break
 
     if not resultsExperiment:  # Validar si la lista de resultados está vacía
         print("No se ingresaron resultados. El experimento no se guardará.")
@@ -60,6 +74,7 @@ def add_experiments(experiments): #funcion para agregar experimentos
     # Guardar los datos del experimento 
     experiment = Experiments(nameExperiment, dateExperiment, typeExperiment, resultsExperiment)
     experiments.append(experiment)
+
     print("Experimento agregado con éxito.")
 
 #funcion para visualizar experimentos
@@ -105,6 +120,26 @@ def calculate_experiments(experiments):
 def compare_experiments(experiments):
     print("\n--- Comparar Experimentos ---")
     visualize_experiments(experiments)
+    
+    indexE = list(map(int, input('Ingrese los números de los experimentos que desea comparar separados por comas: ').split(',')))
+    print(indexE)    
+    print(len(experiments))
+    resultCompare = []
+    
+    for index in indexE:
+        if (0 <= index < len(experiments)):
+            exp = experiments[index]
+            results = exp.resultsExperiment
+            average = sum(results)/len(results)
+            maxi = max(results)
+            mini = min(results)
+            resultCompare.append((exp.nameExperiment, average, maxi, mini))
+            print(resultCompare)
+        else:
+            print(f'Indice {index} no válido')
+    for name, averageE, maxiE, minE in resultCompare:
+        print(f'Nombre: {name}, Promedio: {averageE}, Maximo: {maxiE}, Mínimo: {minE}')
+    '''
     if len(experiments) < 2:
         print("Debe haber al menos dos experimentos para comparar.")
         return
@@ -132,6 +167,7 @@ def compare_experiments(experiments):
             print("Ambos experimentos tienen el mismo promedio.")
     except (IndexError, ValueError):
         print("Selección inválida.")
+        '''
 
 
 def erase_experiments(experiments): #funcion para eliminar un experimento
@@ -202,6 +238,13 @@ def menu():
             else:
                 if option == 1:
                     add_experiments(experiments)
+                    '''experiments = []
+                    experiment1 = Experiments('Exp1', 11/11/2024, 'Biología', [23,34,35,46,56])
+                    experiment2 = Experiments('Exp2', 11/12/2025, 'Física', [23,2,4,65.56,5])
+                    experiment3 = Experiments('Exp3', 11/10/2026, 'Química', [3.4,3,55.6,23,34.5])
+                    experiments.append(experiment1)
+                    experiments.append(experiment2)
+                    experiments.append(experiment3)''' 
                 elif option == 2:
                     visualize_experiments(experiments)
                 elif option == 3:
@@ -222,3 +265,4 @@ def menu():
 if __name__ == "__main__":
       # Llama al menú principal para iniciar la interacción
     menu()
+
