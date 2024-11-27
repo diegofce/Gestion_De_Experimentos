@@ -45,20 +45,12 @@ def add_experiments(experiments): #funcion para agregar experimentos
         except(ValueError):
             print('Tipo no válido. Intente de Nuevo.')
 
-
     # Capturar los resultados
     resultsExperiment = []
-    print("Ingrese los resultados numéricos (ej: 3.5(enter) 2.3(enter)...)(máximo 3). Presione ENTER sin escribir nada para terminar.")
-    while len(resultsExperiment) < 3:
+    while True:
         try:
-            result = input(f"Ingrese el resultado #{len(resultsExperiment) + 1}: ")
-            if not result:  # Salir si se presiona ENTER sin escribir nada
-                break
-            result = float(result)
-            if result >= 0:
-                resultsExperiment.append(result)
-            else:
-                print("Los resultados deben ser números positivos.")
+            result = list(map(float, input(f'Ingrese los resultados separados por comas: ').split(',')))
+            resultsExperiment.append(result)           
         except ValueError:
             print("Entrada no válida. Por favor, ingrese un número.")
 
