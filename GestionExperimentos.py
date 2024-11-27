@@ -58,18 +58,19 @@ def add_experiments(experiments):
             if(result>=0):
                 resultsExperiment.append(result)
                 cont=cont+1 #cuenta los resultados
-                print(f'{cont} resultado agregado con éxito')
+                print(f'---resultado #{cont} agregado con éxito---')
             else:
                 print('** No se puede ingresar números negativos **')
             if(cont<3):
-                print('Por favor ingrese mínimo 3 resultados | Presione enter para continuar')
-            if(cont==3):
-                print('\nPresione enter para salir')
-                break
+                print('Por favor ingrese mínimo 3 resultados')
+            else:
+                print('*** Si termino *** ==>No agregue mas Numeros<== Y Press enter')
         except ValueError:
             # Permite terminar la entrada de resultados
-            if input("¿Terminar entrada de resultados? (Presione: (s) para salir): ").lower() == "s":
+            if cont >= 3 and input("¿Terminar entrada de resultados? (Presione: (s) para salir): ").lower() == "s":
                 break
+            else:
+                print('Debe ingresar al menos 3 resultados antes de finalizar.')
 
     if not resultsExperiment:  # Validar si la lista de resultados está vacía
         print("No se ingresaron resultados. El experimento no se guardará.")
@@ -125,8 +126,8 @@ def compare_experiments(experiments):
     visualize_experiments(experiments)
     
     indexE = list(map(int, input('Ingrese los números de los experimentos que desea comparar separados por comas: ').split(',')))
-    print(indexE)    
-    print(len(experiments))
+    indexE = [i - 1 for i in indexE]
+
     resultCompare = []
     
     for index in indexE:
@@ -142,36 +143,6 @@ def compare_experiments(experiments):
             print(f'Indice {index} no válido')
     for name, averageE, maxiE, minE in resultCompare:
         print(f'Nombre: {name}, Promedio: {averageE}, Maximo: {maxiE}, Mínimo: {minE}')
-    '''
-    if len(experiments) < 2:
-        print("Debe haber al menos dos experimentos para comparar.")
-        return
-
-    try:
-        # Seleccionar los dos experimentos a comparar
-        index1 = int(input("Seleccione el número del primer experimento: ")) - 1
-        index2 = int(input("Seleccione el número del segundo experimento: ")) - 1
-        exp1 = experiments[index1]
-        exp2 = experiments[index2]
-
-        # Comparar promedios
-        avg1 = sum(exp1.resultsExperiment) / len(exp1.resultsExperiment)
-        avg2 = sum(exp2.resultsExperiment) / len(exp2.resultsExperiment)
-
-        print(f"\nComparación entre '{exp1.nameExperiment}' y '{exp2.nameExperiment}':")
-        print(f"- Promedio '{exp1.nameExperiment}': {avg1:.2f}")
-        print(f"- Promedio '{exp2.nameExperiment}': {avg2:.2f}")
-
-        if avg1 > avg2:
-            print(f"'{exp1.nameExperiment}' tiene un promedio mayor.")
-        elif avg1 < avg2:
-            print(f"'{exp2.nameExperiment}' tiene un promedio mayor.")
-        else:
-            print("Ambos experimentos tienen el mismo promedio.")
-    except (IndexError, ValueError):
-        print("Selección inválida.")
-        '''
-
 
 def erase_experiments(experiments): #funcion para eliminar un experimento
     visualize_experiments(experiments)
