@@ -1,5 +1,5 @@
 import datetime 
-from tabulate import tabulate 
+from tabulate import tabulate  
 
 
 #se crea la clase experimentos
