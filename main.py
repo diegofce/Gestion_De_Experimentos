@@ -207,13 +207,6 @@ def menu():
                 if option == 1:
                     print("\n--- Agregar Experimento ---")
                     add_experiments(experiments)
-                    '''experiments = []
-                    experiment1 = Experiments('Exp1', 11/11/2024, 'Biología', [23,34,35,46,56])
-                    experiment2 = Experiments('Exp2', 11/12/2025, 'Física', [23,2,4,65.56,5])
-                    experiment3 = Experiments('Exp3', 11/10/2026, 'Química', [3.4,3,55.6,23,34.5])
-                    experiments.append(experiment1)
-                    experiments.append(experiment2)
-                    experiments.append(experiment3)''' 
                 elif option == 2:
                     print("\n--- Visualización de los Experimentos ---")
                     visualize_experiments(experiments)
