@@ -1,5 +1,9 @@
-## Dev Senior       27/11/2024 
+##          Dev Senior       27/11/2024 
 ## Reto 1 _ Python de Cero a Senior: 'La Ruta Maestra del Código'
+
+##              Grupo #17
+#   Cristhian Javier Garzón Jiménez C.C.1085938174
+#   Diego Fernando Chacón Estacio C.C.1085941933
 
 ## PROYECTO DE INVESTIGACIÓN CIENTÍFICA EN PYTHON
  
@@ -77,7 +81,7 @@ def add_experiments(experiments):
     experiment = Experiments(nameExperiment, dateExperiment, typeExperiment, resultsExperiment)
     experiments.append(experiment)
 
-    print("--- Experimento agregado con éxito ---")
+    print('\n\t--- Experimento agregado con éxito ---')
 
 # funcion para visualizar experimentos: (permite al usuario visualizar los experimentos que ha agregado)
 def visualize_experiments(experiments): 
@@ -89,6 +93,7 @@ def visualize_experiments(experiments):
         [i+1, exp.nameExperiment, exp.dateExperiment.strftime('%d/%m/%Y'), exp.typeExperiment, exp.resultsExperiment]
         for i, exp in enumerate(experiments)
     ]
+    print('')
     print(tabulate(table, headers=["#", "Nombre", "Fecha", "Tipo", "Resultados"]))
 
 # funcion para calcular las estadisticas solicitadas:
@@ -100,7 +105,7 @@ def calculate_experiments(experiments):
         return
     try:
         # Solicitar al usuario que seleccione un experimento por número
-        index = int(input("Seleccione el número del experimento a analizar: ")) - 1
+        index = int(input("\nSeleccione el número del experimento a analizar: ")) - 1
         exp = experiments[index]
         results = exp.resultsExperiment
         if not results:
@@ -110,33 +115,34 @@ def calculate_experiments(experiments):
         average = sum(results) / len(results)
         numMax = max(results)
         numMin = min(results)
-        print(f"Estadísticas del experimento '{exp.nameExperiment}':")
+        print(f"\nEstadísticas del experimento '{exp.nameExperiment}':")
         print(f"  Promedio: {average:.2f}, Máximo: {numMax:.2f}, Mínimo: {numMin:.2f}") #2 decimales
     except (IndexError, ValueError):
         print("Selección inválida.")
 
 def compare_experiments(experiments):
-    print("\n--- Comparar Experimentos ---")
     visualize_experiments(experiments)
-    
-    indexE = list(map(int, input('Ingrese los números de los experimentos que desea comparar separados por comas: ').split(',')))
-    indexE = [i - 1 for i in indexE]
+    try:
+        indexE = list(map(int, input('Ingrese los números de los experimentos que desea comparar separados por comas: ').split(',')))
+        indexE = [i - 1 for i in indexE]
 
-    resultCompare = []
-    
-    for index in indexE:
-        if (0 <= index < len(experiments)):
-            exp = experiments[index]
-            results = exp.resultsExperiment
-            average = sum(results)/len(results)
-            maxi = max(results)
-            mini = min(results)
-            resultCompare.append((exp.nameExperiment, average, maxi, mini))
-            print(resultCompare)
-        else:
-            print(f'Indice {index} no válido')
-    for name, averageE, maxiE, minE in resultCompare:
-        print(f'Nombre: {name}, Promedio: {averageE}, Maximo: {maxiE}, Mínimo: {minE}')
+        resultCompare = []
+        
+        for index in indexE:
+            if (0 <= index < len(experiments)):
+                exp = experiments[index]
+                results = exp.resultsExperiment
+                average = sum(results)/len(results)
+                maxi = max(results)
+                mini = min(results)
+                resultCompare.append((exp.nameExperiment, average, maxi, mini))
+            else:
+                print(f'Indice {index+1} no válido')
+        print('')
+        for name, averageE, maxiE, minE in resultCompare:
+            print(f'Nombre: {name}, Promedio: {averageE}, Maximo: {maxiE}, Mínimo: {minE}')
+    except (ValueError):
+        print('Entrada no válida, intente de nuevo')
 
 def erase_experiments(experiments): #funcion para eliminar un experimento
     visualize_experiments(experiments)
@@ -146,11 +152,12 @@ def erase_experiments(experiments): #funcion para eliminar un experimento
         index = int(input("\nSeleccione el número del experimento a eliminar: ")) - 1
         exp = experiments[index]
         print(f'Esta seguro que desea eliminar el experimento {exp.nameExperiment}?')
-        conf = input('Si (s) _ No (n)').lower()
+        conf = input('Si (s) _ No (n): ').lower()
         if(conf=='s' or conf=='si'):
             experiments.remove(exp)
-            print('**Experimento eliminado con éxito**')
+            print('\n\t**Experimento eliminado con éxito**')
         else:
+            print('No se eliminó ningún experimento')
             return
     except (IndexError,ValueError):
         print('Experimento no existente')
@@ -160,7 +167,6 @@ def generate_Report(experiments): #funcion para generar informe tipo resumen + E
     Crea un informe que incluye la descripción de todos los experimentos,
     sus resultados y estadísticas. Guarda el informe en un archivo .txt.
     """
-    print("\n--- Generación de Informe ---")
     if not experiments:
         print("No hay experimentos para generar un informe.")
         return
@@ -180,7 +186,7 @@ def generate_Report(experiments): #funcion para generar informe tipo resumen + E
                 average = sum(exp.resultsExperiment) / len(exp.resultsExperiment)
                 fileN.write(f"  Promedio: {average:.2f}, Máximo: {max(exp.resultsExperiment):.2f}, Mínimo: {min(exp.resultsExperiment):.2f}\n")
             fileN.write("-" * 50 + "\n")
-    print(f"Informe guardado como '{nameFile}'.")
+    print(f"\nInforme generado con éxito, guardado como '{nameFile}'.")
 
     #"""
     #Muestra el menú principal con opciones para gestionar experimentos,
@@ -190,7 +196,7 @@ def menu():
     experiments = []
     while True:
         try:
-            print("|=======>  Menu:  <=======|")
+            print('\n|=======>  Menu:  <=======|')
             print("| 1. Agregar Experimento  |")
             print("| 2. Mostrar Experimentos |")
             print("| 3. Calcular Estadisticas|")
@@ -205,19 +211,22 @@ def menu():
                 print('Opción no válida. Intente de nuevo')
             else:
                 if option == 1:
-                    print("\n--- Agregar Experimento ---")
+                    print("\n\t--- Agregar Experimento ---")
                     add_experiments(experiments)
                 elif option == 2:
-                    print("\n--- Visualización de los Experimentos ---")
+                    print("\n\t--- Visualizar Experimentos ---")
                     visualize_experiments(experiments)
                 elif option == 3:
-                    print('\n--- Calcular Estadísticas ---')
+                    print('\n\t--- Calcular Estadísticas ---')
                     calculate_experiments(experiments)
                 elif option == 4:
+                    print("\n\t--- Comparar Experimentos ---")
                     compare_experiments(experiments)
                 elif option == 5:
+                    print("\n\t--- Eliminar Experimentos ---")
                     erase_experiments(experiments)
                 elif option == 6:
+                    print("\n\t--- Generar Informe ---")
                     generate_Report(experiments)
                 elif option == 7:
                     print("Saliendo del programa. ¡Hasta luego!")
