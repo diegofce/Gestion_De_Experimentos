@@ -1,32 +1,26 @@
-# Proyecto de investigacion Cientifica con Python
+# Proyecto de Investigación Científica con Python
 
-##Introduccion
+## Introducción
 
-- Desarrollo de una aplicacion basada en consola, para repasar conceptos de programacion como manipulacion de datos.
-- En este reeto encontramos un sistema que permite la entrada y salida de datos experimentales de manera ficticia, y generacion de un informe fina .txt.
-- 
-###Objetivos:
+- Desarrollo de una aplicación basada en consola para repasar conceptos de programación como la manipulación de datos.
+- En este reto, encontramos un sistema que permite la entrada y salida de datos experimentales de manera ficticia y la generación de un informe final en formato .txt.
 
-:fa-chevron-right:  Recopilacion de Datos
-:fa-chevron-right:  Analisis de Resultados
-:fa-chevron-right:  Generacion de Informe
-:fa-chevron-right:  Validacion y manejo de errores
-:fa-chevron-right:  Interaccion mediante menu de opciones
+## Objetivos
 
-#Menu de opciones 
+- **Recopilación de Datos**
+- **Análisis de Resultados**
+- **Generación de Informe**
+- **Validación y Manejo de Errores**
+- **Interacción mediante Menú de Opciones**
 
-`1. Agregar Experimento`
+## Menú de Opciones
 
-`2. Mostrar Experimentos`
+1. **Agregar Experimento**
+2. **Mostrar Experimentos**
+3. **Calcular Estadísticas**
+4. **Comparar Experimentos**
+5. **Eliminar Experimento**
+6. **Generar Informe**
+7. **Salir**
 
-`3. Calcular Estadisticas`
-
-`4. Comparar Experimentos`
-
-`5. Eliminar Experimento`
-
-`6. Generar Informe`
-
-`7. Salir`
-
-###End
+END
