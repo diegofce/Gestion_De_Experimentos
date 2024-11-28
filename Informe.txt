@@ -1,0 +1,8 @@
+Informe de Proyecto de Investigación Científica
+==================================================
+Nombre: Exp2
+Fecha: 11042345
+Tipo: Química
+Resultados: [12.0, 23.0, 23.4]
+  Promedio: 19.47, Máximo: 23.40, Mínimo: 12.00
+--------------------------------------------------
