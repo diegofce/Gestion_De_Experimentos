@@ -15,12 +15,15 @@
 
 ## Menú de Opciones
 
-1. **Agregar Experimento**
-2. **Mostrar Experimentos**
-3. **Calcular Estadísticas**
-4. **Comparar Experimentos**
-5. **Eliminar Experimento**
-6. **Generar Informe**
-7. **Salir**
-
+<div style="background-color: #f0f0f0; padding: 10px; border-radius: 5px;">
+  <ol>
+    <li><strong>Agregar Experimento</strong></li>
+    <li><strong>Mostrar Experimentos</strong></li>
+    <li><strong>Calcular Estadísticas</strong></li>
+    <li><strong>Comparar Experimentos</strong></li>
+    <li><strong>Eliminar Experimento</strong></li>
+    <li><strong>Generar Informe</strong></li>
+    <li><strong>Salir</strong></li>
+  </ol>
+</div>
 END
