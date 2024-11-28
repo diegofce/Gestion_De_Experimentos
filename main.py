@@ -1,10 +1,13 @@
+## Dev Senior       27/11/2024 
+## Reto 1 _ Python de Cero a Senior: 'La Ruta Maestra del Código'
+
+## PROYECTO DE INVESTIGACIÓN CIENTÍFICA EN PYTHON
+ 
 import datetime 
 from tabulate import tabulate  
 
-
-#se crea la clase experimentos
-#Atributos: Nombre experimentos, Fecha realización (DD/MM/AAAA), Tipo experimento y resultados numericos
-
+# Se crea la clase Experimentos para instanciar objetos con atributos como: 
+# Nombre del experimento, Fecha realización (DD/MM/AAAA), Tipo experimento y Resultados numéricos
 class Experiments:
     # función de inicialización, recibe los atributos
     def __init__(self, nameExperiment, dateExperiment, typeExperiment, resultsExperiment):
@@ -13,29 +16,24 @@ class Experiments:
         self.typeExperiment = typeExperiment
         self.resultsExperiment = resultsExperiment 
       
-#funcion para agregar experimentos
+# Función para agregar experimentos: (permite al usuario crear nuevos experimentos con sus respectivos datos y se almacenan en una lista)
 def add_experiments(experiments):
-    """
-    Permite al usuario agregar un nuevo experimento ingresando su nombre, 
-    fecha de realización, tipo y una lista de resultados numéricos.
-    """
-    
-    print("\n--- Agregar Experimento ---")
     nameExperiment = input("Ingrese el nombre del experimento: ")
     
     while True:                             
-        # Validar la fecha del experimento con el formato: DD/MM/AAAA
+        # se valida que la fecha del experimento cumpla con el formato: DD/MM/AAAA
         dateExperiment_str = input("Ingrese la fecha de realización (ejm 23/11/2024): ")
         try:
             dateExperiment = datetime.datetime.strptime(dateExperiment_str, "%d/%m/%Y")
             break  
         except ValueError:
             print("Fecha no válida. Por favor, usar el formato DD/MM/AAAA")
-
-    while True: # Validación del tipo de experimento
+    
+    # se solicita al usuario escoger entre un listado de tipos de experimentos
+    while True: 
         try:
             print('Experimentos disponibles:\n1. Biología \n2. Física \n3. Química')
-            typeE = int(input('Seleccione la categoría que desee: '))
+            typeE = int(input('Seleccione el número de la categoría que desee: '))
             if(typeE == 1):
                 typeExperiment = 'Biología'
                 break
@@ -48,23 +46,22 @@ def add_experiments(experiments):
         except(ValueError):
             print('Tipo no válido. Intente de Nuevo.')
 
-    # Capturar los resultados
+    # se solicita al usuario que ingrese los resultados
     resultsExperiment = []
     cont = 0
     while True:
         try:
-            # Se ingresa cada resultado como un número entero
-            result = float(input("Ingrese los resultados numéricos de su experimento: (ej: 4.5): "))
+            result = float(input("Ingrese cada resultado numérico de su experimento: (ej: 4.5): "))
             if(result>=0):
                 resultsExperiment.append(result)
-                cont=cont+1 #cuenta los resultados
+                cont=cont+1     # se crea un contador de resultados
                 print(f'---resultado #{cont} agregado con éxito---')
             else:
                 print('** No se puede ingresar números negativos **')
             if(cont<3):
                 print('Por favor ingrese mínimo 3 resultados')
             else:
-                print('*** Si termino *** ==>No agregue mas Numeros<== Y Press enter')
+                print('\n*** Si termino *** ==> Press enter')
         except ValueError:
             # Permite terminar la entrada de resultados
             if cont >= 3 and input("¿Terminar entrada de resultados? (Presione: (s) para salir): ").lower() == "s":
@@ -75,16 +72,16 @@ def add_experiments(experiments):
     if not resultsExperiment:  # Validar si la lista de resultados está vacía
         print("No se ingresaron resultados. El experimento no se guardará.")
         return
-    # Guardar los datos del experimento 
+    
+    # se almacenan los datos del experimento en un objeto instanciado de la Clase Experimentos
     experiment = Experiments(nameExperiment, dateExperiment, typeExperiment, resultsExperiment)
     experiments.append(experiment)
 
-    print("--- Experimento agregado con éxito.---")
+    print("--- Experimento agregado con éxito ---")
 
-#funcion para visualizar experimentos
+# funcion para visualizar experimentos: (permite al usuario visualizar los experimentos que ha agregado)
 def visualize_experiments(experiments): 
-    print("\n--- Lista de Experimentos ---")
-    if not experiments:
+    if not experiments:     # validación si no existen experimentos
         print("No hay experimentos registrados")
         return
 
@@ -94,13 +91,10 @@ def visualize_experiments(experiments):
     ]
     print(tabulate(table, headers=["#", "Nombre", "Fecha", "Tipo", "Resultados"]))
 
-#funcion para calcular Estadisticas promedio maximo y minimo de experimentos
+# funcion para calcular las estadisticas solicitadas:
+# permite al usuario calcular estadísticas básicas (valor promedio, valor máximo y valor mínimo) de los resultados de los experimentos)
 def calculate_experiments(experiments): 
-    """
-    Permite al usuario calcular estadísticas básicas (promedio, máximo y mínimo) 
-    de los resultados de un experimento seleccionado.
-    """
-    print("\n--- Análisis de Resultados ---")
+    print('Experimentos disponibles para calcular estadísticas:')
     visualize_experiments(experiments)
     if not experiments:
         return
@@ -211,6 +205,7 @@ def menu():
                 print('Opción no válida. Intente de nuevo')
             else:
                 if option == 1:
+                    print("\n--- Agregar Experimento ---")
                     add_experiments(experiments)
                     '''experiments = []
                     experiment1 = Experiments('Exp1', 11/11/2024, 'Biología', [23,34,35,46,56])
@@ -220,8 +215,10 @@ def menu():
                     experiments.append(experiment2)
                     experiments.append(experiment3)''' 
                 elif option == 2:
+                    print("\n--- Visualización de los Experimentos ---")
                     visualize_experiments(experiments)
                 elif option == 3:
+                    print('\n--- Calcular Estadísticas ---')
                     calculate_experiments(experiments)
                 elif option == 4:
                     compare_experiments(experiments)
