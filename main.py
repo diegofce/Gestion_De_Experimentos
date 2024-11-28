@@ -239,4 +239,3 @@ def menu():
 if __name__ == "__main__":
       # Llama al menú principal para iniciar la interacción
     menu()
-
