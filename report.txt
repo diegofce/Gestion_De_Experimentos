@@ -1,0 +1,8 @@
+Informe de Proyecto de Investigación Científica
+==================================================
+Nombre: sdfb
+Fecha: 11122345
+Tipo: Física
+Resultados: [123.0, 3.0, 23.0]
+  Promedio: 49.67, Máximo: 123.00, Mínimo: 3.00
+--------------------------------------------------
